@@ -11,18 +11,18 @@ function Login() {
         <h1>Sign In</h1>
       </div>
       <form>
-        <input type="text" />
-        <input type="password" />
-        <div>
+        <input className="input-text" placeholder="Login" type="text" />
+        <input className="input-text" placeholder="Password" type="password" />
+        <div className="container">
           <label htmlFor="remember-checkbox">
-            <input id="remember-checkbox" name="remember-checkbox" type="checkbox" />
+            <input className="checkbox" id="remember-checkbox" name="remember-checkbox" type="checkbox" />
             Remember me
           </label>
           <Link to="/">Forgot Password?</Link>
         </div>
         <button type="submit">Login</button>
       </form>
-      <img src={loginVector} alt="" />
+      <img src={loginVector} alt="vector" />
     </main>
   );
 }
