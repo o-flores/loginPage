@@ -1,18 +1,38 @@
 /* eslint-disable no-use-before-define */
-import React from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import './login.scss';
 import loginVector from '../../images/Vectors.png';
 
 function Login() {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    console.log(login);
+    console.log(password);
+  }
   return (
     <main>
       <div className="title">
         <h1>Sign In</h1>
       </div>
-      <form>
-        <input className="input-text" placeholder="Login" type="text" />
-        <input className="input-text" placeholder="Password" type="password" />
+      <form onSubmit={handleSubmit}>
+        <input
+          className="input-text"
+          placeholder="Login"
+          type="text"
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
+        />
+        <input
+          className="input-text"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <div className="container">
           <label htmlFor="remember-checkbox">
             <input className="checkbox" id="remember-checkbox" name="remember-checkbox" type="checkbox" />
