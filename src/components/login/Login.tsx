@@ -42,6 +42,14 @@ function Login() {
         </div>
         <button type="submit">Login</button>
       </form>
+      <p>
+        New Here?
+        <Link
+          to="/create/account"
+        >
+          Register
+        </Link>
+      </p>
       <img src={loginVector} alt="vector" />
     </main>
   );
