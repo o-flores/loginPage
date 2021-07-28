@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useState, FormEvent } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import '../login/login.scss';
 import loginVector from '../../images/Vectors.png';
 
@@ -8,11 +8,32 @@ function Create() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  // const history = useHistory();
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    history.push('/');
+    const myHeaders = new Headers();
+    myHeaders.append('accept', 'application/json');
+    myHeaders.append('Content-Type', 'application/json');
+
+    const raw = JSON.stringify({
+      email,
+      password,
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+    };
+
+    // fetch('http://https://fdr-authmanager.herokuapp.com/api/v1/accounts', requestOptions)
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(result))
+    //   .catch((error) => console.log('error', error));
+    const data = await fetch('http://https://fdr-authmanager.herokuapp.com/api/v1/accounts', requestOptions);
+    console.log(data);
+    // history.push('/');
   }
 
   function verifyForm() {
