@@ -1,17 +1,25 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-use-before-define */
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import './login.scss';
 import loginVector from '../../images/Vectors.png';
+import userLogin from '../../services/userLogin';
 
 function Login() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    console.log(login);
-    console.log(password);
+    const response = await userLogin(login, password);
+    console.log(response);
+  }
+
+  function verifyForm() {
+    if (login && password) return false;
+    return true;
   }
   return (
     <main>
@@ -40,7 +48,12 @@ function Login() {
           </label>
           <Link to="/">Forgot Password?</Link>
         </div>
-        <button type="submit">Login</button>
+        <button
+          type="submit"
+          disabled={verifyForm()}
+        >
+          Login
+        </button>
       </form>
       <p>
         New Here?
