@@ -17,12 +17,11 @@ async function createAccount(email: String, password: String, setLoading: Functi
 
   try {
     await fetch('https://fdr-authmanager.herokuapp.com/api/v1/accounts', requestOptions);
+    setLoading(false);
+    return 'ok';
   } catch (error) {
-    console.log(error);
+    return error;
   }
-  // teste@hotmail.com
-  // 123
-  setLoading(false);
 }
 
 export default createAccount;

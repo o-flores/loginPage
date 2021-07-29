@@ -16,8 +16,10 @@ function Create() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    await createAccount(email, password, setLoading);
-    history.push('/');
+    const response = await createAccount(email, password, setLoading);
+    const data = await response.json();
+    if (data.errors) alert(`${data.errors.description}`);
+    if (data === 'ok') history.push('/');
   }
 
   function verifyForm() {
