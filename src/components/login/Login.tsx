@@ -14,7 +14,9 @@ function Login() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const response = await userLogin(login, password);
-    console.log(response);
+    const data = await response.json();
+    if (data.errors) alert(`${data.errors.description}`);
+    console.log(data);
   }
 
   function verifyForm() {

@@ -19,9 +19,9 @@ async function userLogin(email: String, password: String) {
     return data;
   } catch (error) {
     return error;
-  }
   // teste@hotmail.com
   // 123
+  }
 }
 
 export default userLogin;
