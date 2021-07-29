@@ -2,21 +2,26 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-use-before-define */
 import React, { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './login.scss';
 import loginVector from '../../images/Vectors.png';
 import userLogin from '../../services/userLogin';
+import saveUserOnLocalStorage from '../../services/saveUser';
 
 function Login() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const response = await userLogin(login, password);
     const data = await response.json();
     if (data.errors) alert(`${data.errors.description}`);
-    console.log(data);
+    if (data.account_id) {
+      saveUserOnLocalStorage(data);
+      history.push(`/dashboard/${data.account_id}`);
+    }
   }
 
   function verifyForm() {
