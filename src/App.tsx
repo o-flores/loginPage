@@ -5,6 +5,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from './components/login/Login';
 import Create from './components/createAccount/Create';
+import Dashboard from './components/dashboard/Dashboard';
 import './App.scss';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/create/account" component={Create} />
-
+        <Route exact path="/dashboard/:id" component={Dashboard} />
       </Switch>
     </div>
   );
