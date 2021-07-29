@@ -7,11 +7,14 @@ import './login.scss';
 import loginVector from '../../images/Vectors.png';
 import userLogin from '../../services/userLogin';
 import saveUserOnLocalStorage from '../../services/saveUser';
+import fetchUserInfo from '../../services/fetchUserInfo';
+import { useAuth } from '../../contexts/auth';
 
 function Login() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  const { setUser } = useAuth();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -20,7 +23,9 @@ function Login() {
     if (data.errors) alert(`${data.errors.description}`);
     if (data.account_id) {
       saveUserOnLocalStorage(data);
-      history.push(`/dashboard/${data.account_id}`);
+      const user = await fetchUserInfo(data.access_token, data.account_id);
+      setUser(user);
+      history.push('/dashboard');
     }
   }
 
